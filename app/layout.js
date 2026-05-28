@@ -1,16 +1,19 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+
 export const metadata = {
-  title: "UofA for academic journals",
-  description: "A website for displaying and collecting academic journals",
+  title: "AcadExpub — Academic Journal & Manuscript Publishing Platform",
+  description: "A professional academic publishing platform for peer-reviewed journals, manuscript submissions, and scholarly communication.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gray-900">
-        <Navbar  />
-        {children}
+      <body className="min-h-screen flex flex-col font-sans antialiased selection:bg-accent/10 selection:text-accent">
+        <Navbar />
+        <main className="flex-grow">
+          {children}
+        </main>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 {
-  "name": "iblog",
+  "name": "acadexpub",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
     "@mui/material": "^5.16.4",
     "autoprefixer": "10.4.14",
     "firebase": "^9.22.2",
+    "framer-motion": "^12.0.0-alpha.0",
     "next": "^14.2.5",
     "postcss": "8.4.24",
     "react": "18.2.0",

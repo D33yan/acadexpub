@@ -1,160 +1,133 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-
+import { useState } from 'react';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export default function Page() {
-  const [agreed, setAgreed] = useState(false)
+  const [agreed, setAgreed] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   return (
-    <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8 -z-10">
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
-      >
-        <div
-          style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-          }}
-          className="relative left-1/2 -z-50 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
-        />
-      </div>
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Contact Us</h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
-          Lets See how we can help
+    <div className="bg-ivory min-h-screen py-16 px-6 sm:py-24 lg:px-8 font-sans text-body">
+      <div className="max-w-2xl mx-auto text-center mb-12">
+        <span className="text-xs font-sans tracking-[0.2em] font-bold text-accent uppercase mb-3 inline-block">
+          Support Desk
+        </span>
+        <h2 className="text-3xl font-display font-semibold tracking-tight text-navy sm:text-4xl">
+          Contact the Editorial Board
+        </h2>
+        <p className="mt-4 text-base font-serif text-muted leading-relaxed">
+          Questions regarding manuscript statuses, fee waivers, institutional subscription access, or peer review assignation? Get in touch with our operations team.
         </p>
       </div>
-      <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="first-name" className="block text-sm font-semibold leading-6 text-gray-900">
-              First name
-            </label>
-            <div className="mt-2.5">
-              <input
-                id="first-name"
-                name="first-name"
-                type="text"
-                autoComplete="given-name"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              />
-            </div>
+
+      <div className="max-w-xl mx-auto bg-white border border-rule/75 rounded-md p-6 sm:p-8 shadow-sm">
+        {submitted ? (
+          <div className="text-center py-12">
+            <span className="text-4xl">✉️</span>
+            <h3 className="text-lg font-display font-bold text-navy mt-4">Inquiry Successfully Transmitted</h3>
+            <p className="text-xs font-serif text-muted mt-1.5 leading-relaxed">
+              We have received your editorial inquiry. A corresponding administrative officer will contact you within 48 business hours.
+            </p>
+            <button
+              onClick={() => setSubmitted(false)}
+              className="mt-6 inline-flex items-center justify-center px-4 py-2 border border-accent text-accent font-sans text-xs font-bold rounded hover:bg-accent/5 transition-colors"
+            >
+              Send Another Message
+            </button>
           </div>
-          <div>
-            <label htmlFor="last-name" className="block text-sm font-semibold leading-6 text-gray-900">
-              Last name
-            </label>
-            <div className="mt-2.5">
-              <input
-                id="last-name"
-                name="last-name"
-                type="text"
-                autoComplete="family-name"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              />
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+              <div>
+                <label htmlFor="first-name" className="block text-xs font-sans font-bold uppercase tracking-wider text-navy mb-1.5">
+                  First name <span className="text-accent-alt">*</span>
+                </label>
+                <input
+                  id="first-name"
+                  name="first-name"
+                  type="text"
+                  required
+                  autoComplete="given-name"
+                  className="w-full px-3 py-2 border border-rule rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="last-name" className="block text-xs font-sans font-bold uppercase tracking-wider text-navy mb-1.5">
+                  Last name <span className="text-accent-alt">*</span>
+                </label>
+                <input
+                  id="last-name"
+                  name="last-name"
+                  type="text"
+                  required
+                  autoComplete="family-name"
+                  className="w-full px-3 py-2 border border-rule rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+                />
+              </div>
             </div>
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="company" className="block text-sm font-semibold leading-6 text-gray-900">
-              Company
-            </label>
-            <div className="mt-2.5">
+
+            <div>
+              <label htmlFor="company" className="block text-xs font-sans font-bold uppercase tracking-wider text-navy mb-1.5">
+                Affiliated Institution / University <span className="text-accent-alt">*</span>
+              </label>
               <input
                 id="company"
                 name="company"
                 type="text"
+                required
+                placeholder="e.g. Oxford Academic Department"
                 autoComplete="organization"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                className="w-full px-3 py-2 border border-rule rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
               />
             </div>
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">
-              Email
-            </label>
-            <div className="mt-2.5">
+
+            <div>
+              <label htmlFor="email" className="block text-xs font-sans font-bold uppercase tracking-wider text-navy mb-1.5">
+                Institutional Email <span className="text-accent-alt">*</span>
+              </label>
               <input
                 id="email"
                 name="email"
                 type="email"
+                required
                 autoComplete="email"
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
+                placeholder="you@university.edu"
+                className="w-full px-3 py-2 border border-rule rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
               />
             </div>
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="phone-number" className="block text-sm font-semibold leading-6 text-gray-900">
-              Phone number
-            </label>
-            <div className="relative mt-2.5">
-              <div className="absolute inset-y-0 left-0 flex items-center">
-                <label htmlFor="country" className="sr-only">
-                  Country
-                </label>
-                <select
-                  id="country"
-                  name="country"
-                  className="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm"
-                >
-                  <option>US</option>
-                  <option>CA</option>
-                  <option>EU</option>
-                </select>
-                <ChevronDownIcon
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                />
-              </div>
-              <input
-                id="phone-number"
-                name="phone-number"
-                type="tel"
-                autoComplete="tel"
-                className="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="message" className="block text-sm font-semibold leading-6 text-gray-900">
-              Message
-            </label>
-            <div className="mt-2.5">
+
+            <div>
+              <label htmlFor="message" className="block text-xs font-sans font-bold uppercase tracking-wider text-navy mb-1.5">
+                Detailed Inquiry Statement <span className="text-accent-alt">*</span>
+              </label>
               <textarea
                 id="message"
                 name="message"
-                rows={4}
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                defaultValue={''}
+                rows={5}
+                required
+                placeholder="Please state manuscript tracking codes, or describe your institutional access query..."
+                className="w-full px-3.5 py-2 border border-rule rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent font-serif leading-relaxed"
               />
             </div>
-          </div>
-        </div>
-        <div className="mt-10">
-          <button
-            type="submit"
-            className="block w-full rounded-md bg-gray-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-          >
-            Let's talk
-          </button>
-        </div>
-      </form>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                className="w-full py-2.5 px-4 bg-accent hover:bg-emerald-700 text-white font-sans text-sm font-semibold rounded shadow-md transition-colors duration-150"
+              >
+                Transmit Inquiry
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
-  )
+  );
 }

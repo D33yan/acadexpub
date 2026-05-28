@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { auth } from '../firebaseConfig'; // Adjust the path as needed
+import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Snackbar, Alert } from '@mui/material';
+import Link from 'next/link';
 
 export default function SignUpForm() {
   const [email, setEmail] = useState('');
@@ -17,11 +18,11 @@ export default function SignUpForm() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      setAlertMessage('Sign up successful');
+      setAlertMessage('Account successfully created! Please log in.');
       setAlertSeverity('success');
       setOpen(true);
     } catch (error) {
-      setAlertMessage(error.message);
+      setAlertMessage('Registration failed: ' + error.message);
       setAlertSeverity('error');
       setOpen(true);
     }
@@ -32,72 +33,73 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-700">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
-          Sign up for a new account
-        </h2>
-      </div>
+    <div className='flex items-center justify-center min-h-screen bg-ivory py-12 px-4 sm:px-6 lg:px-8 font-sans text-body'>
+      <div className='bg-white border border-rule/75 p-8 rounded-md shadow-md mx-auto w-full max-w-[500px]'>
+        
+        {/* Brand Header */}
+        <div className="text-center mb-8">
+          <div className="h-11 w-11 rounded-md bg-accent flex items-center justify-center text-white font-display text-2xl font-bold shadow-md mx-auto mb-3">
+            A
+          </div>
+          <h2 className='text-2xl font-display font-semibold text-navy'>Register Author Account</h2>
+          <p className="text-xs font-serif text-muted mt-1">Create your scholarly account to submit and review manuscripts.</p>
+        </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-white p-6 rounded-md shadow-md">
-        <form onSubmit={handleSignUp} className="space-y-6">
+        <form onSubmit={handleSignUp} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-              Email address
+            <label htmlFor="email" className="block text-xs font-sans font-bold uppercase tracking-wider text-navy mb-1.5">
+              Institutional Email
             </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="yourname@institution.edu"
+              required
+              className="w-full px-3 py-2 border border-rule rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+            />
           </div>
 
           <div>
-            <div className="flex items-center justify-between">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                Password
-              </label>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="current-password"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
+            <label htmlFor="password" className="block text-xs font-sans font-bold uppercase tracking-wider text-navy mb-1.5">
+              Choose Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+              className="w-full px-3 py-2 border border-rule rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
+            />
           </div>
 
-          <div>
+          <div className="pt-2">
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-teal-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+              className="w-full py-2.5 px-4 bg-accent hover:bg-emerald-700 text-white font-sans text-sm font-semibold rounded shadow-md transition-colors duration-150"
             >
-              Sign up
+              Create Account
             </button>
-            <p className='text-blue-800 font-bold' >
-            Already have an Account?  <a href="/login" className='text-teal-700' >Sign Up</a>
-          </p>
+            <p className='text-xs font-serif text-muted text-center mt-5'>
+              Already have an author account?{' '}
+              <Link href="/login" className='text-accent hover:underline font-bold font-sans'>
+                Sign In
+              </Link>
+            </p>
           </div>
         </form>
-
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity={alertSeverity} sx={{ width: '100%' }}>
-            {alertMessage}
-          </Alert>
-        </Snackbar>
       </div>
+
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={alertSeverity} sx={{ width: '100%' }}>
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

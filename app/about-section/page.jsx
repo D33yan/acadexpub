@@ -1,62 +1,71 @@
 
-import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from 
-'@heroicons/react/24/outline'
-const features = [
+import { 
+  ShieldCheckIcon, 
+  ArrowPathIcon, 
+  GlobeAltIcon, 
+  AcademicCapIcon 
+} from '@heroicons/react/24/outline';
+
+const pillars = [
   {
-    name: 'Push to deploy',
-    description:
-      'Contribute to our cause by Submitting new journals',
-    icon: CloudArrowUpIcon,
+    name: 'Rigorous Peer Review',
+    description: 'Every submitted manuscript undergoes single-blind or double-blind peer-review by at least two expert referees in the respective scientific discipline.',
+    icon: AcademicCapIcon,
   },
   {
-    name: 'SSL certificates',
-    description:
-      'Secure browser',
-    icon: LockClosedIcon,
+    name: 'Indexed & Universal Open Access',
+    description: 'Licensed under CC BY 4.0, all publications are immediately and permanently free to read, download, and index across global citation indexes.',
+    icon: GlobeAltIcon,
   },
   {
-    name: 'Simple queues',
-    description:
-      'Takes no time at all',
+    name: 'Rapid Editorial Process',
+    description: 'We respect the speed of discovery. Our streamlined editorial queues aim for a first-decision cycle within 21 days of submission.',
     icon: ArrowPathIcon,
   },
   {
-    name: 'Advanced security',
-    description:
-      'User Information is private',
-    icon: FingerPrintIcon,
+    name: 'Academic Integrity & COPE Compliance',
+    description: 'Adhering to strict Committee on Publication Ethics policies, we enforce severe plagiarism checks and clear conflict of interest disclosures.',
+    icon: ShieldCheckIcon,
   },
-]
+];
 
 export default function AboutSection() {
   return (
-    <div className=" bg-gray-800 py-24 sm:py-32">
+    <div className="bg-paper border-y border-rule/50 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-600">For Better Learning</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            A quick solution to improve a better learning environment
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-xs font-sans tracking-[0.2em] font-bold text-accent uppercase mb-3">
+            Institutional Policies
+          </h2>
+          <p className="text-3xl font-display font-semibold tracking-tight text-navy sm:text-4xl">
+            Excellence in Scholarly Communication & Research
           </p>
-          <p className="mt-6 text-lg leading-8 text-white">
-            Certified and Accessible Journals
+          <p className="mt-4 text-base font-serif text-muted max-w-2xl mx-auto leading-relaxed">
+            AcadExpub supports authors, reviewers, and readers by delivering transparent, indexed, and high-impact academic publication systems.
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-white">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-teal-800">
-                    <feature.icon aria-hidden="true" className="h-6 w-6 text-white" />
+        
+        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+          <dl className="grid max-w-xl grid-cols-1 gap-x-12 gap-y-12 lg:max-w-none lg:grid-cols-2">
+            {pillars.map((pillar) => (
+              <div 
+                key={pillar.name} 
+                className="relative pl-16 bg-[#FAF8F4] p-6 rounded-md border border-rule/50 hover:shadow-md transition-shadow duration-200"
+              >
+                <dt className="text-base font-display font-bold text-navy">
+                  <div className="absolute left-4 top-6 flex h-10 w-10 items-center justify-center rounded bg-accent/10 border border-accent/15">
+                    <pillar.icon aria-hidden="true" className="h-5 w-5 text-accent" />
                   </div>
-                  {feature.name}
+                  {pillar.name}
                 </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">{feature.description}</dd>
+                <dd className="mt-2 text-sm font-serif text-body/90 leading-relaxed">
+                  {pillar.description}
+                </dd>
               </div>
             ))}
           </dl>
         </div>
       </div>
     </div>
-  )
+  );
 }

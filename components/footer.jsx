@@ -1,46 +1,71 @@
 import Link from "next/link";
 
+const navLinks = [
+  { href: "/", text: "Home" },
+  { href: "/create-journal", text: "Manuscript Portal" },
+  { href: "/about", text: "Editorial Policies" },
+  { href: "/contact", text: "Contact" },
+];
 
-        const navLinks = [
-            { href: "/", text: "Home" },
-            { href: "/about", text: "About" },
-            { href: "/create-journal", text: "Journals" },
-            { href: "/contact", text: "Contact" },
-          ];
-export function Footer(){
-    return(
-        <footer class="flex flex-col space-y-10 bg-gray-900 border-t-2 justify-center m-10">
+export function Footer() {
+  return (
+    <footer className="bg-navy border-t border-rule/20 py-12 mt-16 text-white/70">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row items-center justify-between border-b border-rule/10 pb-8 mb-8 gap-6">
+          {/* Logo Brand */}
+          <div className="flex items-center space-x-2.5">
+            <div className="h-8 w-8 rounded bg-accent flex items-center justify-center text-white font-display text-lg font-bold shadow-inner">
+              A
+            </div>
+            <span className="text-white font-display text-base tracking-wide font-semibold">
+              AcadEx<span className="text-accent">pub</span>
+            </span>
+          </div>
 
-<div class="flex justify-center flex-wrap gap-6 text-gray-500 font-medium mt-1">
-{navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    {link.text}
-                  </Link>
-                ))}
-</div>
+          {/* Nav Links */}
+          <div className="flex flex-wrap justify-center gap-6 text-sm font-sans font-medium">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="hover:text-white transition-colors duration-150"
+              >
+                {link.text}
+              </Link>
+            ))}
+          </div>
+        </div>
 
-<div class="flex justify-center space-x-5">
-    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.icons8.com/fluent/30/000000/facebook-new.png" />
-    </a>
-    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.icons8.com/fluent/30/000000/linkedin-2.png" />
-    </a>
-    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" />
-    </a>
-    <a href="https://messenger.com" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.icons8.com/fluent/30/000000/facebook-messenger--v2.png" />
-    </a>
-    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
-    </a>
-</div>
-<p class="text-center text-white">&copy; 2024 DivineRealm. All rights reserved.</p>
-</footer>
-)
+        {/* Indexing and Metadata Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-sans text-white/50 mb-8">
+          <div className="space-y-2">
+            <h4 className="text-white font-semibold uppercase tracking-wider text-[10px]">Registry & Prefix</h4>
+            <p>ISSN: <span className="font-mono text-white/70">2944-1290 (Online)</span> | DOI Prefix: <span className="font-mono text-white/70">10.5842</span></p>
+            <p>Registered Publisher: <span className="text-white/70">Divine Academic Publishing House Ltd.</span></p>
+          </div>
+          <div className="space-y-2 md:text-right">
+            <h4 className="text-white font-semibold uppercase tracking-wider text-[10px] md:text-right">Abstracting & Indexing</h4>
+            <p className="flex flex-wrap md:justify-end gap-2 text-[11px] mt-1">
+              <span className="bg-navy-mid border border-rule/10 px-2 py-0.5 rounded text-white/80">PubMed Central</span>
+              <span className="bg-navy-mid border border-rule/10 px-2 py-0.5 rounded text-white/80">Scopus (Elsevier)</span>
+              <span className="bg-navy-mid border border-rule/10 px-2 py-0.5 rounded text-white/80">Web of Science</span>
+              <span className="bg-navy-mid border border-rule/10 px-2 py-0.5 rounded text-white/80">DOAJ</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Copyright and Bottom Links */}
+        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-white/40 border-t border-rule/5 pt-6 gap-4">
+          <p>&copy; {new Date().getFullYear()} AcadExpub. All rights reserved.</p>
+          <div className="flex space-x-4">
+            <Link href="/about" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
+            <span>·</span>
+            <Link href="/about" className="hover:text-white/70 transition-colors">Terms of Service</Link>
+            <span>·</span>
+            <Link href="/about" className="hover:text-white/70 transition-colors">Open Access (CC-BY 4.0)</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }
